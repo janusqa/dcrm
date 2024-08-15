@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "debug_toolbar",
+    "djoser",
+    "core",
     "website",
 ]
 
@@ -118,3 +120,13 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# User Auth
+AUTH_USER_MODEL = "core.AppUser"  # appname.Model
+
+DJOSER = {
+    "SERIALIZERS": {
+        "user_create": "core.serializers.CustomCreateUserSerializer",
+        "current_user": "core.serializers.CustomUserSerializer",
+    },
+}

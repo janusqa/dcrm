@@ -17,6 +17,7 @@
 - django-admin startproject <[myproject]> .
 - python manage.py startapp <[app_name]>
 - break settings.py down into prod and dev files
+- set up auth before doing any migrations. See auth below
 - create two folders in project root folder
   - static
   - media
@@ -172,7 +173,7 @@ re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT}
   - Customize CustomUserAdmin in this case to ask for email during registration in the admin interface. See admin.py in core app
 - now go thru entire app where you imported the default user model and make changes that will swap out the default User for our User model. We have to be careful here not to make any app dependant on core where our User model is
   - so... for example in our likes app we are using the default User model which we need to change
-  - so... in models.py of apps app import settings and now we can access our user model via "settings.AUTH_USER_MODEL". That is anywhere we have old User we can replace it with importing settings and then accessing our user model via "settings.AUTH_USER_MODEL"
+  - so... in models.py of likes app import settings and now we can access our user model via "settings.AUTH_USER_MODEL". That is anywhere we have old User we can replace it with importing settings and then accessing our user model via "settings.AUTH_USER_MODEL"
   - Django creates permissons based on our models that we can assing them to groups we make. Sometimes we may need a permission that may not quite fit the ones django created so we can create them on the model ourselves. Eg. we can create a permission to cancel our order. See store.models.py and review the Meta class in the order model. It consist of permissons = ["xxx", 'yyy"] where xxx is the permission code we use in our app and yyy is a friendly description. Remember to run migrations afer creating permissions
 
 ### Auth endpoints
